@@ -63,7 +63,3 @@ To remove the built image:
 ```sh
  docker rmi custom-jenkins
 ```
-
-## License
-This project is licensed under the MIT License.
-
