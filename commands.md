@@ -1,58 +1,235 @@
-# Docker Commands
+# Docker Commands Cheat Sheet
 
-Some of the most commonly used docker commands are 
+This document provides a list of commonly used Docker commands to help you efficiently manage Docker containers, images, and networks.
 
-### docker images
+## Table of Contents
+- [Docker Images](#docker-images)
+- [Docker Containers](#docker-containers)
+- [Managing Containers](#managing-containers)
+- [Managing Images](#managing-images)
+- [Docker Volumes](#docker-volumes)
+- [Docker Networks](#docker-networks)
+- [Docker Compose](#docker-compose)
+- [Other Useful Commands](#other-useful-commands)
 
-Lists docker images on the host machine.
+---
 
-### docker build
+## Docker Images
 
-Builds image from Dockerfile.
+### **List available images**
+```sh
+docker images
+```
 
-### docker run
+### **Build an image from a Dockerfile**
+```sh
+docker build -t <image_name> .
+```
 
-Runs a Docker container. 
+### **Remove an image**
+```sh
+docker rmi <image_id>
+```
 
-There are many arguments which you can pass to this command for example,
+### **Download an image from Docker Hub**
+```sh
+docker pull <image_name>
+```
 
-`docker run -d` -> Run container in background and print container ID
-`docker run -p` -> Port mapping
+### **Push an image to Docker Hub**
+```sh
+docker push <image_name>
+```
 
-use `docker run --help` to look into more arguments.
+---
 
-### docker ps
+## Docker Containers
 
-Lists running containers on the host machine.
+### **Run a new container**
+```sh
+docker run -d -p 8080:80 --name <container_name> <image_name>
+```
+- `-d` runs the container in detached mode (background).
+- `-p 8080:80` maps port 8080 on the host to port 80 in the container.
+- `--name` assigns a name to the container.
 
-### docker stop
+### **List running containers**
+```sh
+docker ps
+```
 
-Stops running container.
+### **List all containers (including stopped ones)**
+```sh
+docker ps -a
+```
 
-### docker start
+### **Stop a running container**
+```sh
+docker stop <container_id>
+```
 
-Starts a stopped container.
+### **Start a stopped container**
+```sh
+docker start <container_id>
+```
 
-### docker rm
+### **Restart a container**
+```sh
+docker restart <container_id>
+```
 
-Removes a stopped container.
+### **Remove a stopped container**
+```sh
+docker rm <container_id>
+```
 
-### docker rmi
+### **Remove all stopped containers**
+```sh
+docker container prune
+```
 
-Removes an image from the host machine.
+---
 
-### docker pull
+## Managing Images
 
-Downloads an image from the configured registry.
+### **Remove an image**
+```sh
+docker rmi <image_id>
+```
 
-### docker push
+### **Remove all unused images**
+```sh
+docker image prune
+```
 
-Uploads an image to the configured registry.
+### **Remove all unused images, containers, and networks**
+```sh
+docker system prune -a
+```
 
-### docker exec
+---
 
-Run a command in a running container.
+## Docker Volumes
 
-### docker network
+### **List all volumes**
+```sh
+docker volume ls
+```
 
-Manage Docker networks such as creating and removing networks, and connecting containers to networks.
+### **Create a new volume**
+```sh
+docker volume create <volume_name>
+```
+
+### **Inspect a volume**
+```sh
+docker volume inspect <volume_name>
+```
+
+### **Remove a volume**
+```sh
+docker volume rm <volume_name>
+```
+
+### **Remove all unused volumes**
+```sh
+docker volume prune
+```
+
+---
+
+## Docker Networks
+
+### **List all networks**
+```sh
+docker network ls
+```
+
+### **Create a new network**
+```sh
+docker network create <network_name>
+```
+
+### **Connect a container to a network**
+```sh
+docker network connect <network_name> <container_name>
+```
+
+### **Disconnect a container from a network**
+```sh
+docker network disconnect <network_name> <container_name>
+```
+
+### **Remove a network**
+```sh
+docker network rm <network_name>
+```
+
+### **Remove all unused networks**
+```sh
+docker network prune
+```
+
+---
+
+## Docker Compose
+
+### **Start services defined in `docker-compose.yml`**
+```sh
+docker-compose up -d
+```
+
+### **Stop services**
+```sh
+docker-compose down
+```
+
+### **List services**
+```sh
+docker-compose ps
+```
+
+### **Restart services**
+```sh
+docker-compose restart
+```
+
+### **Rebuild services**
+```sh
+docker-compose build
+```
+
+---
+
+## Other Useful Commands
+
+### **Run a command inside a running container**
+```sh
+docker exec -it <container_id> bash
+```
+
+### **Copy files from container to host**
+```sh
+docker cp <container_id>:/path/to/file /host/destination
+```
+
+### **View container logs**
+```sh
+docker logs <container_id>
+```
+
+### **View resource usage of containers**
+```sh
+docker stats
+```
+
+### **Inspect container details**
+```sh
+docker inspect <container_id>
+```
+
+---
+
+## Conclusion
+This cheat sheet provides essential Docker commands for managing containers, images, networks, and volumes efficiently. Keep this handy while working with Docker to streamline your workflow. 🚀
+
